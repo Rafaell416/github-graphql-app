@@ -19,14 +19,15 @@ class HomeScreen extends Component {
   }
 
   _executeSearch = async () => {
-    const { word } = this.state
+    const {word} = this.state
     const result = await this.props.client.query({
       query: REPO_QUERY,
-      variables: { word }
+      variables: { keyword: word }
     })
-    // const repos = result.data
-    // this.setState({repos})
     console.warn(result)
+    this.setState({
+      repos: [...this.state.repos, result]
+    })
   }
 
  render(){
