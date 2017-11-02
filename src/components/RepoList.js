@@ -7,7 +7,7 @@ import {
 
 import RepoCard from './RepoCard'
 
-export default class RepoList extends Component {
+export default class UsersList extends Component {
 
   constructor(props){
     super(props)
@@ -43,7 +43,7 @@ export default class RepoList extends Component {
       <ListView
         enableEmptySections = { true }
         dataSource={this.state.dataSource}
-        renderRow={(repo) =>   <RepoCard repo={repo} />}
+        renderRow={(repo) => <RepoCard repo={repo} />}
           removeClippedSubviews={false}
         />
     )
