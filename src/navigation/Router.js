@@ -8,6 +8,13 @@ import HomeScreen from '../screens/HomeScreen'
 
 
 export const AppNavigation = StackNavigator({
+  LoginScreen: {
+    screen: LoginScreen,
+    navigationOptions: ({ navigation }) => ({
+      header: null,
+      tabBarVisible: false
+    })
+  },
   HomeScreen: {
     screen: HomeScreen,
     navigationOptions: ({ navigation }) => ({
@@ -15,13 +22,6 @@ export const AppNavigation = StackNavigator({
       headerStyle: {
         marginTop: Platform.OS === 'android' ? 25 : 0,
       }
-    })
-  },
-  LoginScreen: {
-    screen: LoginScreen,
-    navigationOptions: ({ navigation }) => ({
-      header: null,
-      tabBarVisible: false
     })
   }
 })

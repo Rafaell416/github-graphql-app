@@ -6,28 +6,34 @@ import {
   StyleSheet,
 } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
-import { signInWithGitHub } from '../Auth/LoginWithGitHub'
+import authenticateWithGithubAsync from '../Auth/authenticateWithGithubAsync'
 
 export default class LoginButton extends Component {
 
   state = {
-    result: null
+    githubToken: null,
+    error: null
   }
-
-loginWihtGithub = () => {
-  const navigation = this.props.navigation
-   signInWithGitHub(navigation).then(result => this.setState({result}))
-}
 
   render(){
     return(
-      <TouchableOpacity style={styles.button} onPress={()=>this.loginWihtGithub()}>
+      <TouchableOpacity style={styles.button} onPress={this._authenticateWithGithubAsync}>
         <View style={styles.btnContainer}>
           <Ionicons name='logo-github' size={30}  color='white'/>
           <Text style={styles.text}>Login With Github</Text>
         </View>
       </TouchableOpacity>
     )
+  }
+
+  _authenticateWithGithubAsync = async () => {
+    try {
+      let result = await authenticateWithGithubAsync()
+      this.setState({githubToken: result})
+      console.warn(this.state.githubToken)
+    } catch(e) {
+      this.setState({error: JSON.stringify(e)})
+    }
   }
 }
 

@@ -1,5 +1,10 @@
 {
   "expo": {
-    "sdkVersion": "22.0.0"
+    "sdkVersion": "22.0.0",
+    "slug": "github-gql-app",
+    "icon": "./public/logo.png",
+    "loading": {
+      "icon": "./public/logo.png"
+    }
   }
 }
