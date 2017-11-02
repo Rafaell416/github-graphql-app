@@ -3,7 +3,6 @@ import {
   Platform
 } from 'react-native'
 import { StackNavigator } from 'react-navigation'
-import LoginScreen from '../screens/LoginScreen'
 import HomeScreen from '../screens/HomeScreen'
 
 
@@ -18,11 +17,3 @@ export const Application = StackNavigator({
     })
   }
 })
-
-// LoginScreen: {
-//   screen: LoginScreen,
-//   navigationOptions: ({ navigation }) => ({
-//     header: null,
-//     tabBarVisible: false
-//   })
-// },
