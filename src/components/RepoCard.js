@@ -7,17 +7,14 @@ import {
 } from 'react-native'
 
 
-export default class UserCard extends Component {
+export default class RepoCard extends Component {
   render(){
-    const { name, avatarUrl, email, websiteUrl, id} = this.props.user.node
+    const { name, id, description} = this.props.repo.node
     return(
       <View style={styles.card} key={id}>
-        <View>
-          <Image source={{ uri: avatarUrl }} style={styles.avatar} />
-        </View>
         <View style={styles.info}>
           <Text style={styles.name}>{name}</Text>
-          <Text>{email || websiteUrl}</Text>
+          <Text>{description}</Text>
         </View>
       </View>
     )

@@ -16,7 +16,6 @@ class HomeScreen extends Component {
       word: '',
       users: [],
       visible: false,
-      filteredUsers: []
     }
   }
 
@@ -36,7 +35,6 @@ class HomeScreen extends Component {
 
  render(){
    const users = this.state.users
-   console.warn(users)
    return (
      <View style={styles.container}>
        <Search
@@ -56,17 +54,18 @@ class HomeScreen extends Component {
 
 const REPO_QUERY = gql`
   query searchRepoByKeyworkd ($keyword: String!) {
-    search(query: $keyword, type:USER, first:5){
+    search(query: $keyword, type:USER, first:100){
       edges{
         node {
           ... on User {
+            id
             name
             bio
             avatarUrl
             location
             email
            websiteUrl
-            repositories (first: 100) {
+            repositories (last: 100) {
               edges {
                 node {
                   name,
