@@ -10,13 +10,16 @@ import LoginButton from '../components/LoginButton'
 export default class Login extends Component {
 
  render(){
-   const {navigate} = this.props.navigation
    return(
      <View style={styles.container}>
        <Text style={styles.text}>Welcome To Aurity's GitHub Explorer</Text>
-       <LoginButton />
+       <LoginButton goHome={this.navigateToHome}/>
      </View>
    )
+ }
+
+ navigateToHome = () => {
+   this.props.navigation.navigate('HomeScreen')
  }
 }
 

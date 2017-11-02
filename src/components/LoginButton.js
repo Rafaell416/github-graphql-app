@@ -30,7 +30,7 @@ export default class LoginButton extends Component {
     try {
       let result = await authenticateWithGithubAsync()
       this.setState({githubToken: result})
-      console.warn(this.state.githubToken)
+      this.props.goHome()
     } catch(e) {
       this.setState({error: JSON.stringify(e)})
     }
