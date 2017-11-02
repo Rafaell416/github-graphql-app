@@ -38,11 +38,9 @@ export default class App extends Component {
   }
 
   componentWillMount(){
-    console.warn('hello will')
     this._authenticateWithGithubAsync()
         .then((token) => {
           TOKEN = token
-          //console.warn(TOKEN)
         })
   }
 

@@ -7,6 +7,7 @@ import {
 }from 'react-native'
 import Search from 'react-native-search-box'
 import { graphql, gql, withApollo } from 'react-apollo'
+import { Tabs } from '../navigation/Router'
 
 
 class HomeScreen extends Component {
@@ -14,7 +15,8 @@ class HomeScreen extends Component {
     super(props)
     this.state = {
       word: '',
-      repos: []
+      repos: [],
+      visible: false
     }
   }
 
@@ -24,14 +26,17 @@ class HomeScreen extends Component {
       query: REPO_QUERY,
       variables: { keyword: word }
     })
-    console.warn(result)
+  //  console.warn(result)
     this.setState({
-      repos: [...this.state.repos, result]
+      repos: [...this.state.repos, result],
+      visible: true
     })
   }
 
  render(){
-   return(
+   const repos = this.state.repos
+
+   return (
      <View style={styles.container}>
        <Search
          ref="search_box"
@@ -39,8 +44,12 @@ class HomeScreen extends Component {
          onSearch={()=>this._executeSearch()}
          blurOnSubmit={true}
        />
+       {
+         this.state.visible ? <Tabs screenProps={repos} /> : null         
+       }
      </View>
    )
+
  }
 }
 
