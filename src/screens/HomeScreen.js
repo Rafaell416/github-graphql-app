@@ -7,16 +7,16 @@ import {
 }from 'react-native'
 import Search from 'react-native-search-box'
 import { graphql, gql, withApollo } from 'react-apollo'
-import { Tabs } from '../navigation/Router'
-
+import UsersList from '../components/UsersList'
 
 class HomeScreen extends Component {
   constructor(props){
     super(props)
     this.state = {
       word: '',
-      repos: [],
-      visible: false
+      users: [],
+      visible: false,
+      filteredUsers: []
     }
   }
 
@@ -26,16 +26,17 @@ class HomeScreen extends Component {
       query: REPO_QUERY,
       variables: { keyword: word }
     })
-  //  console.warn(result)
+    const data = result.data.search.edges
     this.setState({
-      repos: [...this.state.repos, result],
+      users: data,
       visible: true
     })
   }
 
- render(){
-   const repos = this.state.repos
 
+ render(){
+   const users = this.state.users
+   console.warn(users)
    return (
      <View style={styles.container}>
        <Search
@@ -45,7 +46,7 @@ class HomeScreen extends Component {
          blurOnSubmit={true}
        />
        {
-         this.state.visible ? <Tabs screenProps={repos} /> : null         
+         this.state.visible ? <UsersList users={users} navigation={this.props.navigation}/> : null
        }
      </View>
    )
@@ -55,13 +56,25 @@ class HomeScreen extends Component {
 
 const REPO_QUERY = gql`
   query searchRepoByKeyworkd ($keyword: String!) {
-    search(query: $keyword, type:REPOSITORY, first:30){
-      repositoryCount
+    search(query: $keyword, type:USER, first:5){
       edges{
         node {
-          ... on Repository {
+          ... on User {
             name
-            description
+            bio
+            avatarUrl
+            location
+            email
+           websiteUrl
+            repositories (first: 100) {
+              edges {
+                node {
+                  name,
+                  id
+                  description
+                }
+              }
+            }
           }
         }
       }

@@ -5,7 +5,7 @@ import {
   StyleSheet
 }from 'react-native'
 
-export default class UserScreen extends Component {
+export default class UserDetailScreen extends Component {
   render(){
     return(
       <View style={styles.container}>
