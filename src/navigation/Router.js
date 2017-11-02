@@ -7,14 +7,7 @@ import LoginScreen from '../screens/LoginScreen'
 import HomeScreen from '../screens/HomeScreen'
 
 
-export const AppNavigation = StackNavigator({
-  LoginScreen: {
-    screen: LoginScreen,
-    navigationOptions: ({ navigation }) => ({
-      header: null,
-      tabBarVisible: false
-    })
-  },
+export const Application = StackNavigator({
   HomeScreen: {
     screen: HomeScreen,
     navigationOptions: ({ navigation }) => ({
@@ -25,3 +18,11 @@ export const AppNavigation = StackNavigator({
     })
   }
 })
+
+// LoginScreen: {
+//   screen: LoginScreen,
+//   navigationOptions: ({ navigation }) => ({
+//     header: null,
+//     tabBarVisible: false
+//   })
+// },

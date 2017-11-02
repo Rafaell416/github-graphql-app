@@ -13,13 +13,11 @@ export default class Login extends Component {
    return(
      <View style={styles.container}>
        <Text style={styles.text}>Welcome To Aurity's GitHub Explorer</Text>
-       <LoginButton goHome={this.navigateToHome}/>
+       <LoginButton
+         goHome={this.props.navigation.navigate('HomeScreen')}
+       />
      </View>
    )
- }
-
- navigateToHome = () => {
-   this.props.navigation.navigate('HomeScreen')
  }
 }
 

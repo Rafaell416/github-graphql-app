@@ -6,7 +6,18 @@ import {
   StyleSheet,
 } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
+import Storage from 'react-native-storage'
+import { AsyncStorage } from 'react-native'
 import authenticateWithGithubAsync from '../Auth/authenticateWithGithubAsync'
+
+// const storage = new Storage({
+//   size: 1000,
+//   storageBackend: AsyncStorage,
+//   defaultExpires: 1000 * 3600 * 24,
+//   enableCache: true,
+// })
+//
+// global.storage = storage
 
 export default class LoginButton extends Component {
 
@@ -29,11 +40,21 @@ export default class LoginButton extends Component {
   _authenticateWithGithubAsync = async () => {
     try {
       let result = await authenticateWithGithubAsync()
-      this.setState({githubToken: result})
-      this.props.goHome()
+      this.props.goHome
+      this._saveToken(result)
     } catch(e) {
       this.setState({error: JSON.stringify(e)})
     }
+  }
+
+  _saveToken = (token) => {
+    console.log(token)
+    storage.save({
+      key: 'AuthToken',
+      data: {
+        token
+      }
+    })
   }
 }
 
